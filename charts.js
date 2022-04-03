@@ -1,3 +1,5 @@
+// ### Start of Deliverable 1 ###
+
 function init() {
   // Grab a reference to the dropdown select element
   var selector = d3.select("#selDataset");
@@ -113,7 +115,7 @@ function buildMetadata(sample) {
     // 10. Use Plotly to plot the data with the layout. 
     Plotly.newPlot("bar", barData, barLayout, {responsive: true}); 
     
- // ### Bubble Chart Steps 1 - 3 ###
+ // ### Start of Challenge Deliverable 2 ###
     
  // 1. Create the trace for the bubble chart.
  var bubbleData = [{
@@ -142,5 +144,6 @@ console.log(bubbleLayout);
 // 3. Use Plotly to plot the data with the layout.
 Plotly.newPlot("bubble", bubbleData, bubbleLayout, {responsive: true});
 
+// ### Start of Deliverable 3 ###
   });
 }
