@@ -179,6 +179,7 @@ Plotly.newPlot("bubble", bubbleData, bubbleLayout, {responsive: true});
       dtick: 2
       }
     };
+    console.log(gaugeData)
     
     // 5. Create the layout for the gauge chart.
     var gaugeLayout = {automargin: true};
