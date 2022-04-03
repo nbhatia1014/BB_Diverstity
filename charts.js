@@ -1,12 +1,12 @@
-// ### Start of Deliverable 1 ###
+// ### Start of Given Code ###
 
 function init() {
   // Grab a reference to the dropdown select element
-  var selector = d3.select("#selDataset");
+  let selector = d3.select("#selDataset");
 
   // Use the list of sample names to populate the select options
   d3.json("samples.json").then((data) => {
-    var sampleNames = data.names;
+    let sampleNames = data.names;
 
     sampleNames.forEach((sample) => {
       selector
@@ -16,7 +16,7 @@ function init() {
     });
 
     // Use the first sample from the list to build the initial plots
-    var firstSample = sampleNames[0];
+    let firstSample = sampleNames[0];
     buildCharts(firstSample);
     buildMetadata(firstSample);
   });
@@ -35,12 +35,12 @@ function optionChanged(newSample) {
 // Demographics Panel 
 function buildMetadata(sample) {
   d3.json("samples.json").then((data) => {
-    var metadata = data.metadata;
+    let metadata = data.metadata;
     // Filter the data for the object with the desired sample number
-    var resultArray = metadata.filter(sampleObj => sampleObj.id == sample);
-    var result = resultArray[0];
+    let resultArray = metadata.filter(sampleObj => sampleObj.id == sample);
+    let result = resultArray[0];
     // Use d3 to select the panel with id of `#sample-metadata`
-    var PANEL = d3.select("#sample-metadata");
+    let PANEL = d3.select("#sample-metadata");
 
     // Use `.html("") to clear any existing metadata
     PANEL.html("");
@@ -51,9 +51,10 @@ function buildMetadata(sample) {
     Object.entries(result).forEach(([key, value]) => {
       PANEL.append("h6").text(`${key.toUpperCase()}: ${value}`);
     });
-
   });
 }
+
+// ### Start of Challenge Deliverable 1 ###
 
   // 1. Create the buildCharts function.
   function buildCharts(sample) {
@@ -61,19 +62,19 @@ function buildMetadata(sample) {
     d3.json("samples.json").then((data) => {
       // 3. Create a variable that holds the samples array. 
       console.log(data);
-      var samplesArray = data.samples;
+      let samplesArray = data.samples;
       console.log(samplesArray);
       // 4. Create a variable that filters the samples for the object with the desired sample number.
-      var selectedIdSamples = samplesArray.filter(data => data.id == sample);
+      let selectedIdSamples = samplesArray.filter(data => data.id == sample);
       console.log(selectedIdSamples);
       //  5. Create a variable that holds the first sample in the array.
-      var firstSample = selectedIdSamples[0];
+      let firstSample = selectedIdSamples[0];
       console.log(firstSample);
   
       // 6. Create variables that hold the otu_ids, otu_labels, and sample_values.
-      var otuIds = firstSample.otu_ids;
-      var otuLabels = firstSample.otu_labels;
-      var sampleValues = firstSample.sample_values;
+      let otuIds = firstSample.otu_ids;
+      let otuLabels = firstSample.otu_labels;
+      let sampleValues = firstSample.sample_values;
       console.log(otuIds);
       console.log(otuLabels);
       //console.log("hello");
@@ -83,17 +84,17 @@ function buildMetadata(sample) {
       // Hint: Get the the top 10 otu_ids and map them in descending order  
       //  so the otu_ids with the most bacteria are last. 
   
-      var yticks = otuIds.slice(0,10).map(id => "OTU " + id).reverse();
+      let yticks = otuIds.slice(0,10).map(id => "OTU " + id).reverse();
       console.log(yticks);
       
       // 8. Create the trace for the bar chart. 
-      var barData = [{
+      let barData = [{
         x: sampleValues.slice(0,10).reverse(),
         text: otuLabels.slice(0,10).reverse(),
         type: "bar"
       }];
       // 9. Create the layout for the bar chart. 
-      var barLayout = {
+      let barLayout = {
         title: "Top 10 Bacteria Cultures Found",
         yaxis: {
           tickmode: "array",
@@ -118,7 +119,7 @@ function buildMetadata(sample) {
  // ### Start of Challenge Deliverable 2 ###
     
  // 1. Create the trace for the bubble chart.
- var bubbleData = [{
+ let bubbleData = [{
   x: otuIds,
   y: sampleValues,
   text: otuLabels,
@@ -129,9 +130,11 @@ function buildMetadata(sample) {
     colorscale: "Earth"
   }
 }];
+
 console.log(bubbleData);
+
 // 2. Create the layout for the bubble chart.
-var bubbleLayout = {
+let bubbleLayout = {
   title: 'Bacteria Cultures Per Sample',
   showlegend: false,
   xaxis: {title: "OTU ID", automargin: true},
@@ -145,5 +148,35 @@ console.log(bubbleLayout);
 Plotly.newPlot("bubble", bubbleData, bubbleLayout, {responsive: true});
 
 // ### Start of Deliverable 3 ###
+
+  // 1. Create a variable that filters the metadata array for the object with the desired sample number.
+  let metadata = data.metadata;
+  let gaugeArray = metadata.filter(metaObj => metaObj.id == sample);  
+
+  // 2. Create a variable that holds the first sample in the metadata array.
+  let gaugeResults = gaugeArray[0];
+
+  // 3. Create a variable that holds the washing frequency. 
+  let  washfreq =gaugeResults.washfreq
+  console.log(washfreq)
+
+  // Use Plotly to plot the bar data and layout.
+    Plotly.newPlot();
+    
+  // Use Plotly to plot the bubble data and layout.
+    Plotly.newPlot();
+   
+  // 4. Create the trace for the gauge chart.
+    let gaugeData = [
+     
+  ];
+    
+  // 5. Create the layout for the gauge chart.
+  let gaugeLayout = { 
+     
+  };
+
+  // 6. Use Plotly to plot the gauge data and layout.
+  Plotly.newPlot();
   });
 }
